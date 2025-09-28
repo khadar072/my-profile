@@ -38,9 +38,14 @@ const Hero = () => {
                     </h2>
                     <div className="flex  flex-row  items-center mt-4 gap-4">
                         <p className="text-lg font-medium text-gray-700">Know me well!</p>
-                        <button className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                            Download CV
-                        </button>
+                        <a
+                            href="/khadar.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                        >
+                            View CV
+                        </a>
                     </div>
 
                     <a href='#services' className='flex  flex-row gap-1 items-center cursor-pointer my-2 sm:mt-14 '>
