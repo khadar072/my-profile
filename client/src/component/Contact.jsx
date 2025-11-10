@@ -1,7 +1,35 @@
 import React from 'react'
+import { useState } from 'react'
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa'
+import axios from 'axios'
 
 const Contact = () => {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [message, setMessage] = useState('')
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const data = await axios.post('http://localhost:5021/api/auth/send-messages', { name, email, message })
+
+            if (data.data.success === true) {
+                alert('Message sent successfully!');
+                setName('');
+                setEmail('');
+                setMessage('');
+            } else {
+                alert(data.data.message);
+            }
+
+        } catch (error) {
+            console.log(error.message);
+
+        }
+    }
+
     return (
         <div className=''>
             <section
@@ -52,21 +80,27 @@ const Contact = () => {
                     </div>
 
                     {/* Right - Contact Form */}
-                    <form data-aos="zoom-in" className="bg-white p-6 rounded-lg dark:bg-gray-900 dark:text-white shadow-md  shadow-blue-600 flex flex-col gap-4">
+                    <form onSubmit={handleSubmit} data-aos="zoom-in" className="bg-white p-6 rounded-lg dark:bg-gray-900 dark:text-white shadow-md  shadow-blue-600 flex flex-col gap-4">
                         <input
                             type="text"
                             placeholder="Your Name"
+                            value={name}
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            onChange={(e) => setName(e.target.value)}
                         />
                         <input
                             type="email"
                             placeholder="Your Email"
+                            value={email}
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <textarea
                             placeholder="Your Message"
                             rows="5"
+                            value={message}
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            onChange={(e) => setMessage(e.target.value)}
                         ></textarea>
                         <button
                             type="submit"
