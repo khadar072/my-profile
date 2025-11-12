@@ -13,7 +13,7 @@ const Contact = () => {
         e.preventDefault()
 
         try {
-            const data = await axios.post('http://localhost:5021/api/auth/send-messages', { name, email, message })
+            const data = await axios.post('https://my-profile-backend-c3e8.onrender.com/api/auth/send-messages', { name, email, message })
 
             if (data.data.success === true) {
                 alert('Message sent successfully!');
